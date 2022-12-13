@@ -36,11 +36,11 @@ public:
         }
         while(l2!=NULL)
         {
-            value=l1->val+carry;
+            value=l2->val+carry;
             carry=value/10;
             curr->next=new ListNode(value%10);
             curr=curr->next;
-            l1=l1->next;
+            l2=l2->next;
         }
         if(carry==1)
         {

@@ -62,3 +62,56 @@ public:
           return dummy->next;
     }
 };
+/////////////////////////////////////////
+ALTERNATE
+//////////////////////////////////////////
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        Node *current=head;
+        Node *temp;
+        while(current!=NULL)
+        {
+            temp=current->next;
+            current->next=new Node(current->val);
+            current->next->next=temp;
+            current=temp;
+        }
+        current=head;
+        while(current!=NULL)
+        {
+            if(current->next!=NULL)
+            current->next->random=(current->random!=NULL)?current->random->next:NULL;
+            current=current->next->next;
+        }
+        current=head;
+        Node *copy=(head!=NULL)?head->next:NULL;
+        Node *headnew=copy;
+        while(current!=NULL&&copy)
+        {
+            current->next=current->next->next;
+            copy->next=(copy->next!=NULL)?copy->next->next:NULL;
+            copy=copy->next;
+            current=current->next;
+
+        }
+        return headnew;
+
+    }
+};

@@ -9,7 +9,7 @@ public:
         {
             return 1;
         }
-        int y=1;
+        long long int y=1;
         while(x>=y*10)
         {
             y=y*10;

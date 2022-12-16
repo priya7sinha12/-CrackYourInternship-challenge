@@ -1,0 +1,58 @@
+class Solution {
+public:
+    int reverse(int x) {
+        if(x/10==0)
+        {
+            return x;
+        }
+        int max=2147483647,min=-2147483648;
+        if(x>0)
+        {
+            long long int y=1;
+            while(x>=y*10)
+            {
+                y=y*10;
+            }
+            long long int ans=0,temp;
+            while(x!=0)
+            {
+                temp=x%10;
+                ans+=(temp*y);
+                y=y/10;
+                x=x/10;
+            }
+            if(ans>max||ans<min)
+            {
+                return 0;
+            }
+            return ans;
+        }
+        else
+        {
+            if(x<=min)
+            {
+                return 0;
+            }
+            x=abs(x);
+            long long int y=1;
+            while(x>=y*10)
+            {
+                y=y*10;
+            }
+            long long int ans=0,temp;
+            while(x!=0)
+            {
+                temp=x%10;
+                ans+=(temp*y);
+                y=y/10;
+                x=x/10;
+            }
+            ans=ans*(-1);
+            if(ans>max||ans<min)
+            {
+                return 0;
+            }
+            return ans;
+         }
+    }
+};

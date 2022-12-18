@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int carry=0,sum;
+        int l1=a.length()-1,l2=b.length()-1;
+        string res;
+        while(l1>=0||l2>=0)
+        {
+            sum=carry;
+            if(l1>=0)
+            {
+                sum=sum+a[l1--]-'0';
+            }
+            if(l2>=0)
+            {
+                sum=sum+b[l2--]-'0';
+            }
+            carry=sum>1?1:0;
+            res=res+to_string(sum%2);
+        }
+        if(carry==1)
+        {
+            res=res+'1';
+        }
+        reverse(res.begin(),res.end());
+        return res;
+    }
+};

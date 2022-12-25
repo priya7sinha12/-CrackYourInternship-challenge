@@ -1,0 +1,58 @@
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+        stack <pair<int,int>> s,t;
+        int N=1000000007;
+        int n=arr.size();
+        int count=1;
+        vector<long long int> left(n),right(n);
+        for(int i=0;i<n;i++)
+        {
+            count=1;
+            if(s.empty()||s.top().first<arr[i])
+            {
+                //count=1;
+                s.push({arr[i],count});
+                left[i]=count;
+            }
+            else
+            {
+                while(!s.empty()&&s.top().first>arr[i])
+                {
+                    count=count+s.top().second;
+                    s.pop();
+                }
+                s.push({arr[i],count});
+                left[i]=count;
+            }
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            count=1;
+            if(t.empty()||t.top().first<arr[i])
+            {
+                //count=1;
+                t.push({arr[i],count});
+                right[i]=count;
+            }
+            else
+            {
+                while(!t.empty()&&t.top().first>=arr[i])
+                {
+                    count=count+t.top().second;
+                    t.pop();
+                }
+                t.push({arr[i],count});
+                right[i]=count;
+            }
+        }
+        long long int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            //cout<<left[i]<<" "<<right[i]<<endl;
+            ans=ans+(((((arr[i]%N)*(left[i]%N))%N)*(right[i]%N))%N);
+            ans=ans%N;
+        }
+        return ans;
+    }
+};
